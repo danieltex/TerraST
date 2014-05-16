@@ -1,0 +1,3 @@
+useDynLib(TerraST)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
