@@ -5,3 +5,6 @@ rcpp_hello_world <- function() {
     .Call('TerraST_rcpp_hello_world', PACKAGE = 'TerraST')
 }
 
+rcpp_oi <- function() {
+	.Call('oi', PACKAGE = 'TerraST')
+}
