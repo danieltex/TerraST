@@ -22,7 +22,7 @@ void TrajectoryExamples()
 {
 	//Output container
 	boost::ptr_vector<te::st::TrajectoryDataSet> output;
-	
+    
 	//Load the trajectories from a KML Data Source
 	LoadTrajectoryDataSetFromKML(output);
 	
