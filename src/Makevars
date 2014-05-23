@@ -1,1 +1,2 @@
-PKG_CPPFLAGS += -I/usr/local/
+PKG_CPPFLAGS += -I/usr/local/ 
+PKG_LIBS += -L/usr/local/lib/ -lterralib_st -lterralib_stmemory
