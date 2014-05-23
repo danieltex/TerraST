@@ -5,17 +5,25 @@
 
 using namespace Rcpp;
 
-// rcpp_hello_world
-List rcpp_hello_world();
-RcppExport SEXP TerraST_rcpp_hello_world() {
+// oi
+void oi();
+RcppExport SEXP TerraST_oi() {
 BEGIN_RCPP
-    SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        List __result = rcpp_hello_world();
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
+        oi();
     }
-    UNPROTECT(1);
-    return __sexp_result;
+    return R_NilValue;
+END_RCPP
+}
+// TrajectoryExamples
+void TrajectoryExamples();
+RcppExport SEXP TerraST_TrajectoryExamples() {
+BEGIN_RCPP
+    {
+        Rcpp::RNGScope __rngScope;
+        TrajectoryExamples();
+    }
+    return R_NilValue;
 END_RCPP
 }
