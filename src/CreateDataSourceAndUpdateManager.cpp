@@ -11,7 +11,7 @@
 
 // STL
 #include <iostream>
-
+#include <exception>
 void CreateDataSourceAndUpdateManager(te::da::DataSourceInfo& dsinfo)
 {
   try
@@ -24,7 +24,6 @@ void CreateDataSourceAndUpdateManager(te::da::DataSourceInfo& dsinfo)
 
     //Create the data source and put it into the manager
     te::da::DataSourceManager::getInstance().open(dsinfo.getId(), dsinfo.getType(), dsinfo.getConnInfo());
-
   }
   catch(const te::common::Exception& e)
   {

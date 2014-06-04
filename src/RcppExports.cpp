@@ -5,17 +5,6 @@
 
 using namespace Rcpp;
 
-// oi
-void oi();
-RcppExport SEXP TerraST_oi() {
-BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        oi();
-    }
-    return R_NilValue;
-END_RCPP
-}
 // TrajectoryExamples
 void TrajectoryExamples();
 RcppExport SEXP TerraST_TrajectoryExamples() {
@@ -25,5 +14,19 @@ BEGIN_RCPP
         TrajectoryExamples();
     }
     return R_NilValue;
+END_RCPP
+}
+// getTime
+std::vector<Rcpp::Datetime> getTime();
+RcppExport SEXP TerraST_getTime() {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        std::vector<Rcpp::Datetime> __result = getTime();
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }

@@ -126,5 +126,7 @@ void PrintTimeSeries(te::st::TimeSeries* output);
 */
 void PrintCoverageSeriesInfo(te::st::CoverageSeries* output);
 
+void PrintTrajectoryDistance(boost::ptr_vector<te::st::TrajectoryDataSet>& output);
+
 #endif  // __TERRALIB_EXAMPLES_STEXAMPLES_INTERNAL_STEXAMPLES_H
 

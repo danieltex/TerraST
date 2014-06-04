@@ -1,2 +1,3 @@
-PKG_CPPFLAGS += -I/usr/local/ 
-PKG_LIBS += -L/usr/local/lib/ -lterralib_st -lterralib_stmemory
+PKG_CPPFLAGS += -I/usr/local/ -DTE_PLUGINS_PATH=\"/usr/local/bin\" -DTE_DATA_EXAMPLE_DIR=\"/home/danielsan/Downloads\"
+PKG_LIBS += -L/usr/local/lib/ -lterralib_st -lterralib_stmemory -lterralib_plugin
+
