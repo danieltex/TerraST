@@ -9,3 +9,7 @@ getTime <- function() {
     .Call('TerraST_getTime', PACKAGE = 'TerraST')
 }
 
+getPoints <- function() {
+    .Call('TerraST_getPoints', PACKAGE = 'TerraST')
+}
+

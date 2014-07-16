@@ -1,3 +1,5 @@
 useDynLib(TerraST)
 exportPattern("^[[:alpha:]]+")
 importFrom(Rcpp, evalCpp)
+import(sp)
+import(spacetime)
