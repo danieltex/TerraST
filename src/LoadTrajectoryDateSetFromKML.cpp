@@ -10,7 +10,10 @@
 // STL
 #include <iostream>
 
-void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& output)
+// void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& output)
+std::auto_ptr<te::st::TrajectoryDataSet> outputLoadTrajectoryDataSetFromKML(const std::string& URI,
+                                                                            const std::string& dsName,
+                                                                            const std::string& dsID)
 {
   try
   { 
@@ -18,7 +21,8 @@ void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& 
     te::da::DataSourceInfo dsinfo;
 
     std::map<std::string, std::string> connInfo;
-    connInfo["URI"] = ""TE_DATA_EXAMPLE_DIR"/data/st/trajectory/t_40_41.kml" ;
+    // connInfo["URI"] = ""TE_DATA_EXAMPLE_DIR"/data/st/trajectory/t_40_41.kml" ;
+    connInfo["URI"] = URI ;
     dsinfo.setConnInfo(connInfo);
     dsinfo.setType("OGR");
 
@@ -30,22 +34,27 @@ void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& 
     int geomIdx = 12;    /* property name: geom */
 
     //Use the STDataLoader to create a TrajectoryDataSet with all observations
-    te::st::TrajectoryDataSetInfo tjinfo40(dsinfo, "40: locations", phTimeIdx, geomIdx, -1, "40");
-    std::auto_ptr<te::st::TrajectoryDataSet> tjDS40 = te::st::STDataLoader::getDataSet(tjinfo40);
+    // te::st::TrajectoryDataSetInfo tjinfo40(dsinfo, "40: locations", phTimeIdx, geomIdx, -1, "40");
+    // std::auto_ptr<te::st::TrajectoryDataSet> tjDS40 = te::st::STDataLoader::getDataSet(tjinfo40);
+
 		
     //Use the STDataLoader to create a TrajectoryDataSet with all observations
-    te::st::TrajectoryDataSetInfo tjinfo41(dsinfo, "41: locations", phTimeIdx, geomIdx, -1, "41");
-    std::auto_ptr<te::st::TrajectoryDataSet> tjDS41 = te::st::STDataLoader::getDataSet(tjinfo41);
+    // te::st::TrajectoryDataSetInfo tjinfo41(dsinfo, "41: locations", phTimeIdx, geomIdx, -1, "41");
+    // std::auto_ptr<te::st::TrajectoryDataSet> tjDS41 = te::st::STDataLoader::getDataSet(tjinfo41);
 		
+    te::st::TrajectoryDataSetInfo tjinfo(dsinfo, dsName, phTimeIdx, geomIdx, -1, dsID);
+    std::auto_ptr<te::st::TrajectoryDataSet> dataset = te::st::STDataLoader::getDataSet(tjinfo);
+    dataset->moveBeforeFirst();
+    return dataset;
     //Print the spatial and temporal extent as well as the observations of the loaded trajectories
     //PrintTrajectoryDataSet(tjDS40.get());
     //PrintTrajectoryDataSet(tjDS41.get());
 
 	  //Insert into the result container
-	  tjDS40->moveBeforeFirst();
-	  output.push_back(tjDS40);
-	  tjDS41->moveBeforeFirst();
-	  output.push_back(tjDS41);
+	  // tjDS40->moveBeforeFirst();
+	  // output.push_back(tjDS40);
+	  // tjDS41->moveBeforeFirst();
+	  // output.push_back(tjDS41);
 	
     //Use the STDataLoader to create a TrajectoryDataSet with the observations during a given period
     // te::dt::TimeInstant time1(te::dt::Date(2008,01,01), te::dt::TimeDuration(0,0,0));
