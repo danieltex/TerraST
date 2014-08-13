@@ -44,6 +44,7 @@
 //ST examples
 #include <terralib/Config.h>
 
+#include <Rcpp.h>
 /*! 
 	\brief It loads the TerraLib modules. 
 */
@@ -73,9 +74,9 @@ void TrajectoryIntersection(te::st::Trajectory* tj, te::gm::Geometry* geom);
   \brief It loads trajectory data set from KML file
 */
 //void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& output);
-std::auto_ptr<te::st::TrajectoryDataSet> outputLoadTrajectoryDataSetFromKML(const std::string& URI,
-                                                                            const std::string& dsName,
-                                                                            const std::string& dsID)
+SEXP LoadTrajectoryDataSetFromKML(const std::string& URI,
+                                  const std::string& dsName,
+                                  const std::string& dsID);
 /*! 
   \brief It loads a coverage series from a set of geotif files
 */

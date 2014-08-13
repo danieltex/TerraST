@@ -9,11 +9,12 @@
 
 // STL
 #include <iostream>
-
+#include <Rcpp.h>
 // void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& output)
-std::auto_ptr<te::st::TrajectoryDataSet> outputLoadTrajectoryDataSetFromKML(const std::string& URI,
-                                                                            const std::string& dsName,
-                                                                            const std::string& dsID)
+// [[Rcpp::export]]
+SEXP LoadTrajectoryDataSetFromKML(const std::string& URI,
+                                  const std::string& dsName,
+                                  const std::string& dsID)
 {
   try
   { 
@@ -21,8 +22,8 @@ std::auto_ptr<te::st::TrajectoryDataSet> outputLoadTrajectoryDataSetFromKML(cons
     te::da::DataSourceInfo dsinfo;
 
     std::map<std::string, std::string> connInfo;
-    // connInfo["URI"] = ""TE_DATA_EXAMPLE_DIR"/data/st/trajectory/t_40_41.kml" ;
-    connInfo["URI"] = URI ;
+    connInfo["URI"] = ""TE_DATA_EXAMPLE_DIR"/data/st/trajectory/t_40_41.kml" ;
+    //connInfo["URI"] = URI ;
     dsinfo.setConnInfo(connInfo);
     dsinfo.setType("OGR");
 
@@ -42,10 +43,6 @@ std::auto_ptr<te::st::TrajectoryDataSet> outputLoadTrajectoryDataSetFromKML(cons
     // te::st::TrajectoryDataSetInfo tjinfo41(dsinfo, "41: locations", phTimeIdx, geomIdx, -1, "41");
     // std::auto_ptr<te::st::TrajectoryDataSet> tjDS41 = te::st::STDataLoader::getDataSet(tjinfo41);
 		
-    te::st::TrajectoryDataSetInfo tjinfo(dsinfo, dsName, phTimeIdx, geomIdx, -1, dsID);
-    std::auto_ptr<te::st::TrajectoryDataSet> dataset = te::st::STDataLoader::getDataSet(tjinfo);
-    dataset->moveBeforeFirst();
-    return dataset;
     //Print the spatial and temporal extent as well as the observations of the loaded trajectories
     //PrintTrajectoryDataSet(tjDS40.get());
     //PrintTrajectoryDataSet(tjDS41.get());
@@ -73,6 +70,19 @@ std::auto_ptr<te::st::TrajectoryDataSet> outputLoadTrajectoryDataSetFromKML(cons
 	  // output.push_back(tjDS40period);
 	  // tjDS41period->moveBeforeFirst();
 	  // output.push_back(tjDS41period);
+
+    // TODO: consertar erro no load do dataset
+    // std::cout << "Parameters: " << std::endl;
+    // std::cout << URI << std::endl;
+    // std::cout << dsName << std::endl;
+    // std::cout << dsID << std::endl;
+    
+    te::st::TrajectoryDataSetInfo tjinfo(dsinfo, dsName, phTimeIdx, geomIdx, -1, dsID);
+    te::st::TrajectoryDataSet* dataset = te::st::STDataLoader::getDataSet(tjinfo).release();
+    dataset->moveBeforeFirst();
+  
+    Rcpp::XPtr<te::st::TrajectoryDataSet> dsPtr(dataset);
+    return dsPtr;
   }
   catch(const std::exception& e)
   {

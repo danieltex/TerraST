@@ -5,7 +5,7 @@
 #include <terralib/st.h>
 #include <terralib/geometry.h>
 
-std::vector<Rcpp::Datetime> getTime(te::st::TrajectoryDataSet &dataset);
-Rcpp::NumericMatrix getPoints(te::st::TrajectoryDataSet &dataset);
+std::vector<Rcpp::Datetime> getTime(SEXP datasetSEXP);
+Rcpp::NumericMatrix getPoints(SEXP datasetSEXP);
 
 #endif // WRAPPERS_H

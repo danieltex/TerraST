@@ -84,31 +84,31 @@ public:
 };
 TerraLib_Init::_init TerraLib_Init::_initializer;
 
-// [[Rcpp::export]]
-void TrajectoryExamples()
-{
-	try
-	{
-		//initialize();
-		//Output container
-		boost::ptr_vector<te::st::TrajectoryDataSet> output;
+// [Rcpp::export]]
+// void TrajectoryExamples()
+// {
+// 	try
+// 	{
+// 		//initialize();
+// 		//Output container
+// 		boost::ptr_vector<te::st::TrajectoryDataSet> output;
     
-		//Load the trajectories from a KML Data Source
-		LoadTrajectoryDataSetFromKML(output);
+// 		//Load the trajectories from a KML Data Source
+// 		LoadTrajectoryDataSetFromKML(output);
 	
-		//Print trajectory data set info: spatial and temporal extent
-		PrintTrajectoryDataSetInfo(output);
+// 		//Print trajectory data set info: spatial and temporal extent
+// 		PrintTrajectoryDataSetInfo(output);
 
-		PrintTrajectoryDistance(output);
+// 		PrintTrajectoryDistance(output);
 
-		//finalize();
-	}
-	catch(const std::exception& e)
-	{
-		std::cout << std::endl << "An exception has occurried: " << e.what() << std::endl;
-	}
-	catch(...)
-	{
-		std::cout << std::endl << "An unexpected exception has occurried!" << std::endl;
-	}
-}
+// 		//finalize();
+// 	}
+// 	catch(const std::exception& e)
+// 	{
+// 		std::cout << std::endl << "An exception has occurried: " << e.what() << std::endl;
+// 	}
+// 	catch(...)
+// 	{
+// 		std::cout << std::endl << "An unexpected exception has occurried!" << std::endl;
+// 	}
+// }

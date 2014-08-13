@@ -5,25 +5,32 @@
 
 using namespace Rcpp;
 
-// TrajectoryExamples
-void TrajectoryExamples();
-RcppExport SEXP TerraST_TrajectoryExamples() {
-BEGIN_RCPP
-    {
-        Rcpp::RNGScope __rngScope;
-        TrajectoryExamples();
-    }
-    return R_NilValue;
-END_RCPP
-}
-// getTime
-std::vector<Rcpp::Datetime> getTime();
-RcppExport SEXP TerraST_getTime() {
+// LoadTrajectoryDataSetFromKML
+SEXP LoadTrajectoryDataSetFromKML(const std::string& URI, const std::string& dsName, const std::string& dsID);
+RcppExport SEXP TerraST_LoadTrajectoryDataSetFromKML(SEXP URISEXP, SEXP dsNameSEXP, SEXP dsIDSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        std::vector<Rcpp::Datetime> __result = getTime();
+        Rcpp::traits::input_parameter< const std::string& >::type URI(URISEXP );
+        Rcpp::traits::input_parameter< const std::string& >::type dsName(dsNameSEXP );
+        Rcpp::traits::input_parameter< const std::string& >::type dsID(dsIDSEXP );
+        SEXP __result = LoadTrajectoryDataSetFromKML(URI, dsName, dsID);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
+END_RCPP
+}
+// getTime
+std::vector<Rcpp::Datetime> getTime(SEXP datasetSEXP);
+RcppExport SEXP TerraST_getTime(SEXP datasetSEXPSEXP) {
+BEGIN_RCPP
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< SEXP >::type datasetSEXP(datasetSEXPSEXP );
+        std::vector<Rcpp::Datetime> __result = getTime(datasetSEXP);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
@@ -31,13 +38,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // getPoints
-Rcpp::NumericMatrix getPoints();
-RcppExport SEXP TerraST_getPoints() {
+Rcpp::NumericMatrix getPoints(SEXP datasetSEXP);
+RcppExport SEXP TerraST_getPoints(SEXP datasetSEXPSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
-        Rcpp::NumericMatrix __result = getPoints();
+        Rcpp::traits::input_parameter< SEXP >::type datasetSEXP(datasetSEXPSEXP );
+        Rcpp::NumericMatrix __result = getPoints(datasetSEXP);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
