@@ -20,12 +20,12 @@ std::vector<Rcpp::Datetime> getTime()
 	te::st::TrajectoryDataSet &output = outputs[0];
 	
 	std::vector<Rcpp::Datetime> datetime;
+	datetime.reserve(output.size());
 
-	// Inicio do dataset
+	// Move to begin
 	output.moveBeforeFirst();
 	while(output.moveNext())
 	{
-		// std::auto_ptr<String> id = output->getID();
 		std::auto_ptr<te::dt::DateTime> time = output.getTime();		
 		Rcpp::Datetime dt(time->toString(), FORMAT_TIME);
 		datetime.push_back(dt);
@@ -45,31 +45,28 @@ Rcpp::NumericMatrix getPoints()
 	LoadTrajectoryDataSetFromKML(outputs);
 	te::st::TrajectoryDataSet &output = outputs[0];
 
-	Rcpp::NumericVector x;
-	Rcpp::NumericVector y;
-	Rcpp::NumericVector z;
+	std::size_t size = output.size();
+	Rcpp::NumericVector x(size);
+	Rcpp::NumericVector y(size);
 
-	// Inicio do dataset
+	// Move to begin
 	output.moveBeforeFirst();
+	std::size_t i = 0;
 	while(output.moveNext())
 	{
-		// std::auto_ptr<String> id = output->getID();
-
 		std::auto_ptr<te::gm::Geometry> geom = output.getGeometry();
 		te::gm::Point *point = dynamic_cast<te::gm::Point *>(geom.get());
 		
-		x.push_back(point->getX());
-		y.push_back(point->getY());
-		z.push_back(point->getZ());
-		// std::cout << "Date and Time: " <<  time->toString() << std::endl;
+		x[i] = point->getX();
+		y[i] = point->getY();
+		++i;
 	}
 
-	// Rcpp::List dimnames = Rcpp::List::create( Rcpp::CharacterVector::create("x", "y", "z"), Rcpp::CharacterVector::create());
-	Rcpp::NumericMatrix points(x.size(), 3);
-	// points.attr("dimnames") = dimnames;
+	// Rcpp::List dimnames = Rcpp::List::create( 
+	// 	Rcpp::CharacterVector::create("x", "y", "z"), Rcpp::CharacterVector::create());
+	Rcpp::NumericMatrix points(x.size(), 2);
 	points(Rcpp::_,0) = x;
 	points(Rcpp::_,1) = y;
-	points(Rcpp::_,2) = z;
 
 	return points;
 }

@@ -10,7 +10,6 @@
 // STL
 #include <iostream>
 
-// [Rcpp::export]
 void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& output)
 {
   try
