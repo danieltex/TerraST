@@ -7,26 +7,26 @@
 #define FORMAT_TIME "%Y-%b-%d %H:%M:%S"
 
 // [[Rcpp::export]]
-std::vector<Rcpp::Datetime> getTime()
+std::vector<Rcpp::Datetime> getTime(te::st::TrajectoryDataSet &dataset)
 {
 
 	std::locale l("");
 	std::setlocale(LC_ALL,"en_US.UTF-8");
 
-	boost::ptr_vector<te::st::TrajectoryDataSet> outputs;
+	// boost::ptr_vector<te::st::TrajectoryDataSet> outputs;
     
 	// Load the trajectories from a KML Data Source
-	LoadTrajectoryDataSetFromKML(outputs);
-	te::st::TrajectoryDataSet &output = outputs[0];
+	// LoadTrajectoryDataSetFromKML(outputs);
+	// te::st::TrajectoryDataSet &output = outputs[0];
 	
 	std::vector<Rcpp::Datetime> datetime;
 	datetime.reserve(output.size());
 
 	// Move to begin
-	output.moveBeforeFirst();
-	while(output.moveNext())
+	dataset.moveBeforeFirst();
+	while(dataset.moveNext())
 	{
-		std::auto_ptr<te::dt::DateTime> time = output.getTime();		
+		std::auto_ptr<te::dt::DateTime> time = dataset.getTime();		
 		Rcpp::Datetime dt(time->toString(), FORMAT_TIME);
 		datetime.push_back(dt);
 	}
@@ -37,24 +37,24 @@ std::vector<Rcpp::Datetime> getTime()
 }
 
 // [[Rcpp::export]]
-Rcpp::NumericMatrix getPoints()
+Rcpp::NumericMatrix getPoints(te::st::TrajectoryDataSet &dataset)
 {
-	boost::ptr_vector<te::st::TrajectoryDataSet> outputs;
+	// boost::ptr_vector<te::st::TrajectoryDataSet> outputs;
     
 	// Load the trajectories from a KML Data Source
-	LoadTrajectoryDataSetFromKML(outputs);
-	te::st::TrajectoryDataSet &output = outputs[0];
+	// LoadTrajectoryDataSetFromKML(outputs);
+	// te::st::TrajectoryDataSet &output = outputs[0];
 
-	std::size_t size = output.size();
+	std::size_t size = dataset.size();
 	Rcpp::NumericVector x(size);
 	Rcpp::NumericVector y(size);
 
 	// Move to begin
-	output.moveBeforeFirst();
+	dataset.moveBeforeFirst();
 	std::size_t i = 0;
-	while(output.moveNext())
+	while(dataset.moveNext())
 	{
-		std::auto_ptr<te::gm::Geometry> geom = output.getGeometry();
+		std::auto_ptr<te::gm::Geometry> geom = dataset.getGeometry();
 		te::gm::Point *point = dynamic_cast<te::gm::Point *>(geom.get());
 		
 		x[i] = point->getX();
