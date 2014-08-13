@@ -48,22 +48,22 @@ void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& 
 	  output.push_back(tjDS41);
 	
     //Use the STDataLoader to create a TrajectoryDataSet with the observations during a given period
-    te::dt::TimeInstant time1(te::dt::Date(2008,01,01), te::dt::TimeDuration(0,0,0));
-    te::dt::TimeInstant time2(te::dt::Date(2008,03,31), te::dt::TimeDuration(23,59,59));
-    te::dt::TimePeriod period(time1, time2); 
+    // te::dt::TimeInstant time1(te::dt::Date(2008,01,01), te::dt::TimeDuration(0,0,0));
+    // te::dt::TimeInstant time2(te::dt::Date(2008,03,31), te::dt::TimeDuration(23,59,59));
+    // te::dt::TimePeriod period(time1, time2); 
 
-    std::auto_ptr<te::st::TrajectoryDataSet> tjDS40period = te::st::STDataLoader::getDataSet(tjinfo40, period, te::dt::DURING);
-    std::auto_ptr<te::st::TrajectoryDataSet> tjDS41period = te::st::STDataLoader::getDataSet(tjinfo41, period, te::dt::DURING);
+    // std::auto_ptr<te::st::TrajectoryDataSet> tjDS40period = te::st::STDataLoader::getDataSet(tjinfo40, period, te::dt::DURING);
+    // std::auto_ptr<te::st::TrajectoryDataSet> tjDS41period = te::st::STDataLoader::getDataSet(tjinfo41, period, te::dt::DURING);
 
     //Print the spatial and temporal extent as well as the observations of the loaded trajectories
     //PrintTrajectoryDataSet(tjDS40period.get());
     //PrintTrajectoryDataSet(tjDS41period.get()); 
 	
 	  //Insert into the result container
-	  tjDS40period->moveBeforeFirst();
-	  output.push_back(tjDS40period);
-	  tjDS41period->moveBeforeFirst();
-	  output.push_back(tjDS41period);
+	  // tjDS40period->moveBeforeFirst();
+	  // output.push_back(tjDS40period);
+	  // tjDS41period->moveBeforeFirst();
+	  // output.push_back(tjDS41period);
   }
   catch(const std::exception& e)
   {
