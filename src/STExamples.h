@@ -26,6 +26,9 @@
 #ifndef __TERRALIB_EXAMPLES_STEXAMPLES_INTERNAL_STEXAMPLES_H
 #define __TERRALIB_EXAMPLES_STEXAMPLES_INTERNAL_STEXAMPLES_H
 
+#include "Rcpp.h"
+#undef Free
+
 // TerraLib
 #include <terralib/common_fw.h>
 #include <terralib/dataaccess_fw.h>
@@ -44,7 +47,6 @@
 //ST examples
 #include <terralib/Config.h>
 
-#include <Rcpp.h>
 /*! 
 	\brief It loads the TerraLib modules. 
 */
@@ -71,12 +73,18 @@ void TrajectoryDistance(te::st::Trajectory* tj1, te::st::Trajectory* tj2);
 void TrajectoryIntersection(te::st::Trajectory* tj, te::gm::Geometry* geom);
 
 /*! 
-  \brief It loads trajectory data set from KML file
+  \brief It loads a trajectory data set from KML file
 */
 //void LoadTrajectoryDataSetFromKML(boost::ptr_vector<te::st::TrajectoryDataSet>& output);
 SEXP LoadTrajectoryDataSetFromKML(const std::string& URI,
                                   const std::string& dsName,
                                   const std::string& dsID);
+
+/*! 
+  \brief It loads a trajectory data set from a data source
+*/
+SEXP LoadTrajectoryDataSet(const te::st::TrajectoryDataSetInfo& tjinfo);
+
 /*! 
   \brief It loads a coverage series from a set of geotif files
 */

@@ -5,11 +5,7 @@ LoadTrajectoryDataSetFromKML <- function(URI, dsName, dsID) {
     .Call('TerraST_LoadTrajectoryDataSetFromKML', PACKAGE = 'TerraST', URI, dsName, dsID)
 }
 
-getTime <- function(datasetSEXP) {
-    .Call('TerraST_getTime', PACKAGE = 'TerraST', datasetSEXP)
-}
-
-getPoints <- function(datasetSEXP) {
-    .Call('TerraST_getPoints', PACKAGE = 'TerraST', datasetSEXP)
+getTrajectorySpaceTimeFeatures <- function(datasetSEXP) {
+    .Call('TerraST_getTrajectorySpaceTimeFeatures', PACKAGE = 'TerraST', datasetSEXP)
 }
 

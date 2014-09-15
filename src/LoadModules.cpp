@@ -1,5 +1,5 @@
 // Examples
-#include "STExamples.h"
+//#include "STExamples.h"
 
 // TerraLib
 #include <terralib/common.h>

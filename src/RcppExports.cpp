@@ -22,30 +22,15 @@ BEGIN_RCPP
     return __sexp_result;
 END_RCPP
 }
-// getTime
-std::vector<Rcpp::Datetime> getTime(SEXP datasetSEXP);
-RcppExport SEXP TerraST_getTime(SEXP datasetSEXPSEXP) {
+// getTrajectorySpaceTimeFeatures
+List getTrajectorySpaceTimeFeatures(SEXP datasetSEXP);
+RcppExport SEXP TerraST_getTrajectorySpaceTimeFeatures(SEXP datasetSEXPSEXP) {
 BEGIN_RCPP
     SEXP __sexp_result;
     {
         Rcpp::RNGScope __rngScope;
         Rcpp::traits::input_parameter< SEXP >::type datasetSEXP(datasetSEXPSEXP );
-        std::vector<Rcpp::Datetime> __result = getTime(datasetSEXP);
-        PROTECT(__sexp_result = Rcpp::wrap(__result));
-    }
-    UNPROTECT(1);
-    return __sexp_result;
-END_RCPP
-}
-// getPoints
-Rcpp::NumericMatrix getPoints(SEXP datasetSEXP);
-RcppExport SEXP TerraST_getPoints(SEXP datasetSEXPSEXP) {
-BEGIN_RCPP
-    SEXP __sexp_result;
-    {
-        Rcpp::RNGScope __rngScope;
-        Rcpp::traits::input_parameter< SEXP >::type datasetSEXP(datasetSEXPSEXP );
-        Rcpp::NumericMatrix __result = getPoints(datasetSEXP);
+        List __result = getTrajectorySpaceTimeFeatures(datasetSEXP);
         PROTECT(__sexp_result = Rcpp::wrap(__result));
     }
     UNPROTECT(1);
