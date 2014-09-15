@@ -12,8 +12,8 @@ using namespace Rcpp;
 List getTrajectorySpaceTimeFeatures(SEXP datasetSEXP)
 {
 	// Time conversion is locale dependent
-	std::locale l("");
-	std::setlocale(LC_ALL,"en_US.UTF-8");
+	// std::locale l("");
+	// std::setlocale(LC_ALL,"en_US.UTF-8");
 
 	XPtr<te::st::TrajectoryDataSet> dataset(datasetSEXP);
 	std::size_t size = dataset->size();
@@ -46,7 +46,7 @@ List getTrajectorySpaceTimeFeatures(SEXP datasetSEXP)
 	points(_,1) = y;
 
 	// Reseting to native locale
-	std::setlocale(LC_ALL, l.name().c_str());
+	// std::setlocale(LC_ALL, l.name().c_str());
 
 	// return List::create(Named("points") = points, Named("time") = datetime);
 	return List::create(Named("points") = points, Named("time") = posixct);
