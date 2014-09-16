@@ -26,21 +26,30 @@ List getTrajectorySpaceTimeFeatures(SEXP datasetSEXP)
 	// Move to begin
 	dataset->moveBeforeFirst();
 	std::size_t i = 0;
+	std::string previous_datetime = "";
 	while(dataset->moveNext())
 	{
 		std::auto_ptr<te::dt::DateTime> time = dataset->getTime();		
-		//Datetime dt(time->toString(), FORMAT_TIME);
-		//datetime.push_back(dt);
-
-		std::auto_ptr<te::gm::Geometry> geom = dataset->getGeometry();
-		te::gm::Point *point = dynamic_cast<te::gm::Point *>(geom.get());
+		std::string current_datetime = time->toString();
+		if(previous_datetime != current_datetime)
+		{
+			previous_datetime = current_datetime;
+			std::auto_ptr<te::gm::Geometry> geom = dataset->getGeometry();
+			te::gm::Point *point = dynamic_cast<te::gm::Point *>(geom.get());
 		
-		x[i] = point->getX();
-		y[i] = point->getY();
-		posixct[i] = time->toString();
-		++i;
+			x[i] = point->getX();
+			y[i] = point->getY();
+			posixct[i] = current_datetime;
+			++i;
+		}
 	}
-
+	if(i < size)
+	{
+		x.erase(i, size);
+		y.erase(i, size);
+		posixct.erase(i, size);
+	}
+	
 	NumericMatrix points(x.size(), 2);
 	points(_,0) = x;
 	points(_,1) = y;
